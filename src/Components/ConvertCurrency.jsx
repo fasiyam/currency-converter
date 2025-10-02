@@ -1,13 +1,17 @@
 import React from 'react';
 import DropdownOption from "./DropdownOption.jsx";
 
-const DropdownForm = ({name, id, currencies}) => {
+const ConvertCurrency = ({name, id, currencies, setConvertCurrency}) => {
     const updatedCurrencies = currencies.filter(cur => cur[1].length !== 0)
+
+    const handleConvertCurrency = e => {
+        setConvertCurrency(e.target.value)
+    }
 
     return (
         <div>
             <form className='border-1 border-gray-400 p-2.5 rounded-2xl focus:border-0 outline-0'>
-                <select name={name} id={id}>
+                <select name={name} id={id} onChange={handleConvertCurrency}>
                     {
                         updatedCurrencies.map((currency, index) => <DropdownOption key={index} currency={currency}></DropdownOption>)
                     }
@@ -17,4 +21,4 @@ const DropdownForm = ({name, id, currencies}) => {
     );
 };
 
-export default DropdownForm;
+export default ConvertCurrency;

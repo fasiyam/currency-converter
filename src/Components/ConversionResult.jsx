@@ -13,7 +13,7 @@ const ConversionResult = ({convertedAmount, convertCurrency, baseCurrency,  curr
                 <h1 className='text-4xl font-semibold'>{convertedAmount}</h1>
                 <p className='text-2xl'>{finalConverCurr}</p>
             </div>
-            <p>{`${amount} ${finalBaseCurr} equals 1295.40 ${finalConverCurr}`}</p>
+            <p>{`${amount} ${finalBaseCurr} equals ${convertedAmount} ${finalConverCurr}`}</p>
         </div>
     );
 };

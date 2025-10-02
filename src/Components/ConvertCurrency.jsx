@@ -1,7 +1,7 @@
 import React from 'react';
 import DropdownOption from "./DropdownOption.jsx";
 
-const ConvertCurrency = ({name, id, currencies, setConvertCurrency}) => {
+const ConvertCurrency = ({name, id, currencies, setConvertCurrency, swapConvertCurr}) => {
     const updatedCurrencies = currencies.filter(cur => cur[1].length !== 0)
 
     const handleConvertCurrency = e => {

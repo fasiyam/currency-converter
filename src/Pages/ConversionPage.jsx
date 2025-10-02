@@ -3,6 +3,7 @@ import ConversionResult from '../Components/ConversionResult';
 import InputField from '../Components/InputField';
 import BasseCurrency from '../Components/BaseCurrency';
 import ConvertCurrency from '../Components/ConvertCurrency';
+import { FlipHorizontal2 } from 'lucide-react';
 
 const currenciesAPI = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies.json";
 
@@ -13,7 +14,9 @@ const ConversionPage = () => {
     const [convertCurrency, setConvertCurrency] = useState('');
     const [convertedAmount, setConvertedAmount] = useState('');
     const [amount, setAmount] = useState('');
-    const [baseCurrConversionData, setBaseCurrConversionData] = useState([])
+    const [baseCurrConversionData, setBaseCurrConversionData] = useState([]);
+    const [swapBaseCurr, setSwapBaseCurr] = useState('');
+    const [swapConvertCurr, setSwapConvertCurr] = useState("");
 
 
     useEffect(() => {
@@ -74,6 +77,15 @@ const ConversionPage = () => {
     }, [amount, baseCurrConversionData, convertCurrency]); 
 
 
+    const reverseCurrData = () => {
+        setBaseCurrency(convertCurrency);
+        setConvertCurrency(baseCurrency);
+        setSwapBaseCurr(baseCurrency);
+        setSwapConvertCurr(convertCurrency);
+    }
+
+    
+
     return (
         <div className='h-[100dvh] flex flex-col justify-center items-center '>
             <div className='flex flex-col items-center justify-center border-none shadow-2xl bg-white p-10 rounded-2xl space-y-10 max-w-[660px]'>
@@ -82,14 +94,17 @@ const ConversionPage = () => {
 
                 <InputField setAmount={setAmount}></InputField>
 
-                <div className='flex gap-10'>
+                <div className='flex gap-1 items-center justify-center'>
                     <div>
                         <p className='text-xl font-semibold'>From</p>
-                        <BasseCurrency name="baseCurrency" id='baseCurrency' currencies={currencies} setBaseCurrency={setBaseCurrency}></BasseCurrency>
+                        <BasseCurrency name="baseCurrency" id='baseCurrency' currencies={currencies} swapBaseCurr={swapBaseCurr} setBaseCurrency={setBaseCurrency}></BasseCurrency>
+                    </div>
+                    <div onClick={reverseCurrData} className='border-2'>
+                        <FlipHorizontal2 />
                     </div>
                     <div>
                         <p className='text-xl font-semibold'>To</p>
-                        <ConvertCurrency name="convertCurrency" id="convertCurrency" currencies={currencies} setConvertCurrency={setConvertCurrency}></ConvertCurrency>
+                        <ConvertCurrency name="convertCurrency" id="convertCurrency" currencies={currencies} setConvertCurrency={setConvertCurrency} swapConvertCurr={swapConvertCurr}></ConvertCurrency>
                     </div>
                 </div>
                 <ConversionResult amount={amount} convertedAmount={convertedAmount} convertCurrency={convertCurrency}  baseCurrency={baseCurrency} currencies={currencies}></ConversionResult>

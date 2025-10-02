@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ConversionResult from '../Components/ConversionResult';
 import InputField from '../Components/InputField';
 import BasseCurrency from '../Components/BaseCurrency';
@@ -15,8 +15,6 @@ const ConversionPage = () => {
     const [convertedAmount, setConvertedAmount] = useState('');
     const [amount, setAmount] = useState('');
     const [baseCurrConversionData, setBaseCurrConversionData] = useState([]);
-    const [swapBaseCurr, setSwapBaseCurr] = useState('');
-    const [swapConvertCurr, setSwapConvertCurr] = useState("");
 
 
     useEffect(() => {
@@ -76,14 +74,6 @@ const ConversionPage = () => {
         
     }, [amount, baseCurrConversionData, convertCurrency]); 
 
-
-    const reverseCurrData = () => {
-        setBaseCurrency(convertCurrency);
-        setConvertCurrency(baseCurrency);
-        setSwapBaseCurr(baseCurrency);
-        setSwapConvertCurr(convertCurrency);
-    }
-
     
 
     return (
@@ -97,14 +87,11 @@ const ConversionPage = () => {
                 <div className='flex gap-1 items-center justify-center'>
                     <div>
                         <p className='text-xl font-semibold'>From</p>
-                        <BasseCurrency name="baseCurrency" id='baseCurrency' currencies={currencies} swapBaseCurr={swapBaseCurr} setBaseCurrency={setBaseCurrency}></BasseCurrency>
-                    </div>
-                    <div onClick={reverseCurrData} className='border-2'>
-                        <FlipHorizontal2 />
+                        <BasseCurrency name="baseCurrency" id='baseCurrency' currencies={currencies} setBaseCurrency={setBaseCurrency}></BasseCurrency>
                     </div>
                     <div>
                         <p className='text-xl font-semibold'>To</p>
-                        <ConvertCurrency name="convertCurrency" id="convertCurrency" currencies={currencies} setConvertCurrency={setConvertCurrency} swapConvertCurr={swapConvertCurr}></ConvertCurrency>
+                        <ConvertCurrency name="convertCurrency" id="convertCurrency" currencies={currencies} setConvertCurrency={setConvertCurrency} ></ConvertCurrency>
                     </div>
                 </div>
                 <ConversionResult amount={amount} convertedAmount={convertedAmount} convertCurrency={convertCurrency}  baseCurrency={baseCurrency} currencies={currencies}></ConversionResult>

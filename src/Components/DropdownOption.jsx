@@ -1,11 +1,7 @@
 import React from 'react';
 
-const DropdownOption = () => {
-    return (
-        <div>
-            <option value=""></option>
-        </div>
-    );
+const DropdownOption = ({ currency }) => {
+    return ( <option value={currency[0]}>{currency[1]}</option>);
 };
 
 export default DropdownOption;

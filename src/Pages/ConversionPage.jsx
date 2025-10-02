@@ -13,7 +13,7 @@ const ConversionPage = () => {
         const getCurrencies = async () => {
             const res = await fetch(currenciesAPI);
             const resData = await res.json();
-            const currencyCodesArray = Object.values(resData);
+            const currencyCodesArray = Object.entries(resData);
             setCurrencies(currencyCodesArray);
         };
 
@@ -26,12 +26,10 @@ const ConversionPage = () => {
                 <h1 className='text-[#4338ca] text-6xl mb-2.5'>Universal Currency Converter</h1>
                 <p className='text-[#202020] mb-8'>Rates relative to a common base currency</p>
 
-                <DropdownForm name="baseCurrency" id='baseCurrency'></DropdownForm>
+                <DropdownForm name="baseCurrency" id='baseCurrency' currencies={currencies}></DropdownForm>
+                <DropdownForm name="convertCurrency" id="convertCurrency" currencies={currencies}></DropdownForm>
                 <ConversionResult></ConversionResult>
-                
-                {
-                    currencies.map(c => console.log(c))
-                }
+
             </div>
         </div>
     );
